@@ -1,0 +1,32 @@
+注意存放镜像的盘为FAT32的系统盘
+
+CentOS、Fedora:
+
+将isolinux  images 两个文件夹拷出来，将isolinux文件夹里的wmlinuz 和initrd.img也拷出来
+
+在 menu.lst 中添加
+
+title install centos
+root (hd0,X)
+kernel (hd0,X)/isolinux/vmlinuz linux askmethod
+initrd (hd0,X)/isolinux/initrd.img
+
+
+Ubuntu:
+
+将casper文件夹中的vmlinuz 和 initrd.lz两个文件提取到根目录下.
+
+
+title install Ubuntu 12.04
+root (hd0,X)
+kernel /vmlinuz boot=casper iso-scan/filename=/ubuntu-12.04-desktop-i386.iso ro quiet splash
+initrd /initrd.lz
+
+ubuntu amd64位安装
+将casper文件夹中的vlinuz.efi initrd.lz两个文件提取到根目录下
+title install Ubuntu 14.10
+root (hd0,X)
+kernel /vmlinuz.efi boot=casper noacpi iso-scan/filename=/ubuntukylin-14.10-desktop-amd64.iso ro quiet splash
+label check live-install
+initrd /initrd.lz
+boot
